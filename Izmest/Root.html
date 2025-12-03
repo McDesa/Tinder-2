@@ -11,9 +11,15 @@
       height: 100%;
       width: 100%;
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 18px; /* 🔵 taille globale augmentée */
+      font-size: 18px; /* taille globale */
       background-color: #000;
       overflow: hidden;
+    }
+
+    /* Police & taille unifiées partout */
+    * {
+      font-family: inherit !important;
+      font-size: inherit !important;
     }
 
     .page {
@@ -27,7 +33,6 @@
       display: block;
     }
 
-    /* Fond plein écran */
     .fullscreen-img {
       width: 100%;
       height: 100%;
@@ -35,7 +40,6 @@
       display: block;
     }
 
-    /* Pages 2, 3, 4 : même fond image */
     .page-with-bg {
       background-size: cover;
       background-position: center;
@@ -68,12 +72,13 @@
 
     button {
       width: 100%;
-      padding: 14px 18px;
+      padding: 16px 20px;
       border-radius: 999px;
       border: 1px solid #fff;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       cursor: pointer;
+      font-family: inherit !important;
     }
 
     .btn-delete {
@@ -105,10 +110,11 @@
     .fields input,
     .fields textarea {
       width: 100%;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      padding: 10px 12px;
-      font-size: 14px;
+      padding: 14px 16px;
+      font-size: 18px !important;
+      font-family: inherit !important;
       box-sizing: border-box;
       outline: none;
     }
@@ -118,14 +124,25 @@
       resize: vertical;
     }
 
+    .fields input::placeholder,
+    .fields textarea::placeholder {
+      font-size: 18px !important;
+      font-family: inherit !important;
+      opacity: 0.75;
+      color: #eeeeee;
+    }
+
     .helper-text {
-      font-size: 13px;
-      opacity: 0.8;
+      font-size: 18px;
+      font-weight: 400;
+      color: #fff;
+      opacity: 0.9;
     }
 
     .status-text {
       font-size: 22px;
       font-weight: 700;
+      color: #fff;
       text-shadow: 0 0 10px rgba(0,0,0,0.6);
     }
   </style>
@@ -290,6 +307,7 @@
   </script>
 </body>
 </html>
+
 
 
 
